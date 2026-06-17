@@ -1,4 +1,5 @@
-import { Skeleton, SkeletonCard } from './Skeleton';
+import { Skeleton } from './Skeleton';
+import { SkeletonCard } from './SkeletonCard';
 
 export function LearningPathDetailSkeleton() {
   return (

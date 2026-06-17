@@ -21,7 +21,7 @@ declare global{
 	const QuestionListSkeleton: typeof import('./src/components/QuestionCardSkeleton')['QuestionListSkeleton']
 	const QuestionDetailSkeleton: typeof import('./src/components/QuestionDetailSkeleton')['QuestionDetailSkeleton']
 	const Skeleton: typeof import('./src/components/Skeleton')['Skeleton']
-	const SkeletonCard: typeof import('./src/components/Skeleton')['SkeletonCard']
+	const SkeletonCard: typeof import('./src/components/SkeletonCard')['SkeletonCard']
 	const Category: typeof import('./src/pages/Category')['default']
 	const ExamConfigPage: typeof import('./src/pages/ExamConfig')['default']
 	const ExamHistoryPage: typeof import('./src/pages/ExamHistory')['default']
@@ -30,6 +30,7 @@ declare global{
 	const Home: typeof import('./src/pages/Home')['default']
 	const LearningPathDetail: typeof import('./src/pages/LearningPathDetail')['default']
 	const LearningPathList: typeof import('./src/pages/LearningPathList')['default']
+	const Playground: typeof import('./src/pages/Playground')['default']
 	const QuestionDetail: typeof import('./src/pages/QuestionDetail')['default']
 	const SearchPage: typeof import('./src/pages/Search')['default']
 }

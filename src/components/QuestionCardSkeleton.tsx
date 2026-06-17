@@ -1,4 +1,5 @@
-import { Skeleton, SkeletonCard } from './Skeleton';
+import { Skeleton } from './Skeleton';
+import { SkeletonCard } from './SkeletonCard';
 import { cn } from '@/lib/utils';
 
 interface QuestionCardSkeletonProps {

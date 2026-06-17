@@ -27,11 +27,15 @@ declare global {
   const durationOptions: typeof import('./config/exam').durationOptions
   const evaluateAnswerScore: typeof import('./lib/scoring').evaluateAnswerScore
   const examDefaultConfig: typeof import('./config/exam').examDefaultConfig
+  const executeCode: typeof import('./lib/codeExecutor').executeCode
+  const executeJavaScript: typeof import('./lib/codeExecutor').executeJavaScript
+  const executePython: typeof import('./lib/codeExecutor').executePython
   const forwardRef: typeof import('react').forwardRef
   const getScoreLevel: typeof import('./config/score').getScoreLevel
   const iconMap: typeof import('./config/icons').iconMap
   const isAnswerCorrect: typeof import('./lib/scoring').isAnswerCorrect
   const lazy: typeof import('react').lazy
+  const loadPyodideRuntime: typeof import('./lib/codeExecutor').loadPyodideRuntime
   const memo: typeof import('react').memo
   const passScore: typeof import('./config/score').passScore
   const pathLevelConfig: typeof import('./config/learningPath').pathLevelConfig
@@ -68,6 +72,7 @@ declare global {
   const useOutlet: typeof import('react-router-dom').useOutlet
   const useOutletContext: typeof import('react-router-dom').useOutletContext
   const useParams: typeof import('react-router-dom').useParams
+  const usePlaygroundStore: typeof import('./store/usePlaygroundStore').usePlaygroundStore
   const useReducer: typeof import('react').useReducer
   const useRef: typeof import('react').useRef
   const useResolvedPath: typeof import('react-router-dom').useResolvedPath

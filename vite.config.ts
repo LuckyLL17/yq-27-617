@@ -59,6 +59,8 @@ export default defineConfig({
     Components({
       dts: true,
       local: true,
+      globs: ['src/components/**/*.{tsx,jsx}'],
+      exclude: [/Skeleton/, /skeleton/],
     }),
     traeBadgePlugin({
       variant: 'dark',

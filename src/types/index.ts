@@ -126,3 +126,61 @@ export interface LearningProgress {
   startedAt: number | null;
   lastStudiedAt: number | null;
 }
+
+/**
+ * 支持的编程语言类型
+ */
+export type PlaygroundLanguage = 'javascript' | 'python';
+
+/**
+ * 代码执行结果状态
+ */
+export type ExecutionStatus = 'idle' | 'running' | 'success' | 'error';
+
+/**
+ * 代码执行结果
+ */
+export interface ExecutionResult {
+  /** 执行状态 */
+  status: ExecutionStatus;
+  /** 标准输出 */
+  stdout: string;
+  /** 错误输出 */
+  stderr: string;
+  /** 执行耗时（毫秒） */
+  duration: number;
+}
+
+/**
+ * 保存的代码片段
+ */
+export interface SavedCodeSnippet {
+  /** 唯一标识 */
+  id: string;
+  /** 代码标题 */
+  title: string;
+  /** 编程语言 */
+  language: PlaygroundLanguage;
+  /** 代码内容 */
+  code: string;
+  /** 创建时间 */
+  createdAt: number;
+  /** 最后更新时间 */
+  updatedAt: number;
+}
+
+/**
+ * 在线编程页面状态
+ */
+export interface PlaygroundState {
+  /** 当前选中的语言 */
+  language: PlaygroundLanguage;
+  /** 当前代码内容 */
+  code: string;
+  /** 执行结果 */
+  result: ExecutionResult;
+  /** 保存的代码片段列表 */
+  savedSnippets: SavedCodeSnippet[];
+  /** Python 运行时是否已加载 */
+  pythonRuntimeLoaded: boolean;
+}

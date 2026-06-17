@@ -10,6 +10,7 @@ import ExamResultPage from "@/pages/ExamResult";
 import ExamHistoryPage from "@/pages/ExamHistory";
 import LearningPathList from "@/pages/LearningPathList";
 import LearningPathDetail from "@/pages/LearningPathDetail";
+import Playground from "@/pages/Playground";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/playground" element={<Playground />} />
             <Route path="/learning-paths" element={<LearningPathList />} />
             <Route path="/learning-path/:pathId" element={<LearningPathDetail />} />
             <Route path="/category/:categoryId" element={<Category />} />
