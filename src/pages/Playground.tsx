@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Play, RotateCcw, Download, Upload, Settings, Terminal, Code2, Zap } from 'lucide-react';
+import { Play, RotateCcw, Download, Upload, Settings, Terminal, Code2, Zap, Save, X } from 'lucide-react';
 import CodeEditor from '@/components/CodeEditor';
 import OutputPanel from '@/components/OutputPanel';
 import SnippetManager from '@/components/SnippetManager';
@@ -22,8 +22,42 @@ export default function Playground() {
   const [fontSize, setFontSize] = useState(14);
   const [pythonReady, setPythonReady] = useState(false);
   const [pythonLoading, setPythonLoading] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [snippetTitle, setSnippetTitle] = useState('');
   
-  const { getCurrentSnippet, setCurrentSnippet } = useCodeSnippetStore();
+  const { getCurrentSnippet, setCurrentSnippet, saveSnippet } = useCodeSnippetStore();
+
+  /**
+   * 打开保存对话框
+   */
+  const handleOpenSaveDialog = useCallback(() => {
+    const current = getCurrentSnippet();
+    setSnippetTitle(current ? current.title : `未命名代码 ${new Date().toLocaleString()}`);
+    setShowSaveDialog(true);
+  }, [getCurrentSnippet]);
+
+  /**
+   * 保存代码片段
+   */
+  const handleSave = useCallback(() => {
+    const title = snippetTitle.trim() || '未命名代码';
+    const current = getCurrentSnippet();
+    
+    if (current) {
+      // 更新现有片段
+      useCodeSnippetStore.getState().updateSnippet(current.id, {
+        title,
+        code,
+        language,
+      });
+    } else {
+      // 创建新片段
+      const newSnippet = saveSnippet(title, code, language);
+      setCurrentSnippet(newSnippet.id);
+    }
+    
+    setShowSaveDialog(false);
+  }, [snippetTitle, code, language, getCurrentSnippet, saveSnippet, setCurrentSnippet]);
 
   /**
    * 页面加载时预加载 Python 运行时
@@ -55,21 +89,23 @@ export default function Playground() {
    * 监听保存快捷键
    */
   useEffect(() => {
-    const handleSave = () => {
-      // 触发保存操作
+    const handleSaveShortcut = () => {
       const current = getCurrentSnippet();
       if (current) {
+        // 已有代码片段，直接更新
         useCodeSnippetStore.getState().updateSnippet(current.id, {
           code,
           language,
         });
-        // 可以加一个保存成功的提示
+      } else {
+        // 没有代码片段，打开保存对话框
+        handleOpenSaveDialog();
       }
     };
     
-    window.addEventListener('editor-save', handleSave);
-    return () => window.removeEventListener('editor-save', handleSave);
-  }, [code, language, getCurrentSnippet]);
+    window.addEventListener('editor-save', handleSaveShortcut);
+    return () => window.removeEventListener('editor-save', handleSaveShortcut);
+  }, [code, language, getCurrentSnippet, handleOpenSaveDialog]);
 
   /**
    * 运行代码
@@ -313,6 +349,16 @@ export default function Playground() {
                 <Settings className="w-4 h-4" />
               </button>
 
+              {/* 保存按钮 */}
+              <button
+                onClick={handleOpenSaveDialog}
+                className="flex items-center gap-2 px-4 py-2 bg-primary-500/10 text-primary-400 hover:bg-primary-500/20 border border-primary-500/30 rounded-lg transition-all font-medium"
+                title="保存代码 (Ctrl+S)"
+              >
+                <Save className="w-4 h-4" />
+                <span className="hidden sm:inline">保存</span>
+              </button>
+
               {/* 运行按钮 */}
               <button
                 onClick={handleRun}
@@ -413,6 +459,82 @@ export default function Playground() {
           </div>
         </div>
       </div>
+
+      {/* 保存对话框 */}
+      {showSaveDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-dark-800 rounded-xl border border-dark-700 w-full max-w-md p-6 shadow-2xl mx-4">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <Save className="w-5 h-5 text-primary-400" />
+                {getCurrentSnippet() ? '更新代码片段' : '保存代码片段'}
+              </h3>
+              <button
+                onClick={() => setShowSaveDialog(false)}
+                className="p-1.5 text-dark-400 hover:text-white hover:bg-dark-700 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-dark-300 mb-2">
+                代码标题
+              </label>
+              <input
+                type="text"
+                value={snippetTitle}
+                onChange={(e) => setSnippetTitle(e.target.value)}
+                placeholder="输入代码标题..."
+                className="w-full px-4 py-2.5 bg-dark-900 border border-dark-600 rounded-lg text-white placeholder:text-dark-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
+                autoFocus
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSave();
+                  if (e.key === 'Escape') setShowSaveDialog(false);
+                }}
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-dark-300 mb-2">
+                编程语言
+              </label>
+              <div className="flex items-center gap-2">
+                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium ${
+                  language === 'javascript' 
+                    ? 'bg-yellow-500/20 text-yellow-400' 
+                    : 'bg-blue-500/20 text-blue-400'
+                }`}>
+                  <span className={`w-5 h-5 rounded text-xs font-bold flex items-center justify-center bg-gradient-to-br ${
+                    language === 'javascript' 
+                      ? 'from-yellow-500 to-orange-500' 
+                      : 'from-blue-500 to-cyan-500'
+                  } text-white`}>
+                    {language === 'javascript' ? 'JS' : 'PY'}
+                  </span>
+                  {language === 'javascript' ? 'JavaScript' : 'Python'}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowSaveDialog(false)}
+                className="flex-1 py-2.5 px-4 bg-dark-700 text-dark-300 rounded-lg hover:bg-dark-600 transition-colors font-medium"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleSave}
+                className="flex-1 py-2.5 px-4 bg-gradient-to-r from-primary-500 to-cyan-500 text-white rounded-lg hover:from-primary-600 hover:to-cyan-600 transition-all font-medium flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25"
+              >
+                <Save className="w-4 h-4" />
+                {getCurrentSnippet() ? '更新' : '保存'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 代码片段侧边栏 */}
       <SnippetManager
