@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from "vite-tsconfig-paths";
 import { traeBadgePlugin } from 'vite-plugin-trae-solo-badge';
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-react-components/vite'
+// import Components from 'unplugin-react-components/vite'
 import path from 'node:path'
 
 export default defineConfig({
@@ -56,10 +56,10 @@ export default defineConfig({
         globalsPropValue: true,
       },
     }),
-    Components({
-      dts: true,
-      local: true,
-    }),
+    // Components({
+    //   dts: true,
+    //   local: true,
+    // }),
     traeBadgePlugin({
       variant: 'dark',
       position: 'bottom-right',
