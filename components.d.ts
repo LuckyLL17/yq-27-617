@@ -23,6 +23,7 @@ declare global{
 	const Skeleton: typeof import('./src/components/Skeleton')['Skeleton']
 	const SkeletonCard: typeof import('./src/components/Skeleton')['SkeletonCard']
 	const Category: typeof import('./src/pages/Category')['default']
+	const CodePlayground: typeof import('./src/pages/CodePlayground')['default']
 	const ExamConfigPage: typeof import('./src/pages/ExamConfig')['default']
 	const ExamHistoryPage: typeof import('./src/pages/ExamHistory')['default']
 	const ExamResultPage: typeof import('./src/pages/ExamResult')['default']
