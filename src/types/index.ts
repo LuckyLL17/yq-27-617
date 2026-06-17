@@ -126,3 +126,33 @@ export interface LearningProgress {
   startedAt: number | null;
   lastStudiedAt: number | null;
 }
+
+/** 在线编程支持的语言类型 */
+export type CodeLanguage = 'javascript' | 'python';
+
+/** 代码执行输出行的类型 */
+export type OutputLineType = 'log' | 'error' | 'info' | 'result';
+
+/** 代码执行输出的一行记录 */
+export interface OutputLine {
+  type: OutputLineType;
+  content: string;
+  timestamp: number;
+}
+
+/** 代码执行结果 */
+export interface CodeRunResult {
+  success: boolean;
+  outputs: OutputLine[];
+  executionTime: number;
+}
+
+/** 保存的代码片段 */
+export interface SavedCodeSnippet {
+  id: string;
+  title: string;
+  language: CodeLanguage;
+  code: string;
+  createdAt: number;
+  updatedAt: number;
+}

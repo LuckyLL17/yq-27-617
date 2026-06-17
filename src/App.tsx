@@ -10,6 +10,7 @@ import ExamResultPage from "@/pages/ExamResult";
 import ExamHistoryPage from "@/pages/ExamHistory";
 import LearningPathList from "@/pages/LearningPathList";
 import LearningPathDetail from "@/pages/LearningPathDetail";
+import CodePlayground from "@/pages/CodePlayground";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/exam/take" element={<ExamTakePage />} />
             <Route path="/exam/result" element={<ExamResultPage />} />
             <Route path="/exam/history" element={<ExamHistoryPage />} />
+            <Route path="/code-playground" element={<CodePlayground />} />
           </Routes>
         </main>
         <footer className="border-t border-dark-700 py-8 mt-auto">
