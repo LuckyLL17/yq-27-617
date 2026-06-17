@@ -36,7 +36,7 @@ const highlightJava = (code: string): string => {
     .replace(/(@\w+)/g, '<span class="text-yellow-400">$1</span>');
 };
 
-const highlightPython = (code: string): string => {
+export const highlightPython = (code: string): string => {
   return code
     .replace(/(#.*$)/gm, '<span class="text-dark-500">$1</span>')
     .replace(/('''[\s\S]*?'''|"""[\s\S]*?""")/g, '<span class="text-dark-500">$1</span>')
@@ -57,7 +57,7 @@ const highlightGo = (code: string): string => {
     .replace(/\b(\d+\.?\d*|0x[0-9a-fA-F]+|0o[0-7]+|0b[01]+)\b/g, '<span class="text-orange-400">$1</span>');
 };
 
-const highlightJavaScript = (code: string): string => {
+export const highlightJavaScript = (code: string): string => {
   return code
     .replace(/(\/\/.*$)/gm, '<span class="text-dark-500">$1</span>')
     .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-dark-500">$1</span>')

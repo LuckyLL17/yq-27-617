@@ -23,12 +23,32 @@ export default defineConfig({
   },
   build: {
     sourcemap: 'hidden',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'zustand': ['zustand'],
+          'lucide': ['lucide-react'],
+        },
+      },
+    },
   },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: false,
+  },
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'zustand',
+      'lucide-react',
+      'clsx',
+      'tailwind-merge',
+    ],
   },
   plugins: [
     react({
@@ -57,8 +77,12 @@ export default defineConfig({
       },
     }),
     Components({
-      dts: true,
-      local: true,
+      dts: 'components.d.ts',
+      dirs: ['src/components'],
+      extensions: ['tsx'],
+      deep: true,
+      directives: false,
+      include: [/\.tsx$/, /\.ts$/],
     }),
     traeBadgePlugin({
       variant: 'dark',

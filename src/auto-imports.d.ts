@@ -45,6 +45,8 @@ declare global {
   const use: typeof import('react').use
   const useActionState: typeof import('react').useActionState
   const useCallback: typeof import('react').useCallback
+  const useCodeRunner: typeof import('./hooks/useCodeRunner').useCodeRunner
+  const useCodeStorage: typeof import('./hooks/useCodeStorage').useCodeStorage
   const useContext: typeof import('react').useContext
   const useDebugValue: typeof import('react').useDebugValue
   const useDeferredValue: typeof import('react').useDeferredValue

@@ -49,6 +49,8 @@
     "use": true,
     "useActionState": true,
     "useCallback": true,
+    "useCodeRunner": true,
+    "useCodeStorage": true,
     "useContext": true,
     "useDebugValue": true,
     "useDeferredValue": true,

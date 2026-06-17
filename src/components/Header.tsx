@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BookOpen, Search, Menu, X, ClipboardList, History, Route } from 'lucide-react';
+import { BookOpen, Search, Menu, X, ClipboardList, History, Route, Code2 } from 'lucide-react';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -70,6 +70,13 @@ export default function Header() {
               className="px-4 py-2 text-dark-300 hover:text-white hover:bg-dark-800 rounded-lg transition-colors"
             >
               系统设计
+            </Link>
+            <Link
+              to="/playground"
+              className="px-4 py-2 text-dark-300 hover:text-white hover:bg-dark-800 rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <Code2 className="w-4 h-4" />
+              在线编程
             </Link>
             <Link
               to="/exam/config"
@@ -172,6 +179,14 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 系统设计
+              </Link>
+              <Link
+                to="/playground"
+                className="px-4 py-2 text-dark-300 hover:text-white hover:bg-dark-800 rounded-lg transition-colors flex items-center gap-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Code2 className="w-4 h-4" />
+                在线编程
               </Link>
               <Link
                 to="/exam/config"

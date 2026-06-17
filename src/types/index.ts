@@ -126,3 +126,44 @@ export interface LearningProgress {
   startedAt: number | null;
   lastStudiedAt: number | null;
 }
+
+/**
+ * 支持的编程语言类型
+ */
+export type SupportedLanguage = 'javascript' | 'python';
+
+/**
+ * 代码执行结果类型
+ */
+export type ExecutionStatus = 'idle' | 'running' | 'success' | 'error';
+
+/**
+ * 代码执行输出项
+ */
+export interface OutputLine {
+  type: 'log' | 'error' | 'warn' | 'info' | 'result';
+  content: string;
+  timestamp: number;
+}
+
+/**
+ * 代码执行结果
+ */
+export interface ExecutionResult {
+  status: ExecutionStatus;
+  output: OutputLine[];
+  duration?: number;
+  error?: string;
+}
+
+/**
+ * 保存的代码片段
+ */
+export interface SavedCode {
+  id: string;
+  name: string;
+  language: SupportedLanguage;
+  code: string;
+  createdAt: number;
+  updatedAt: number;
+}
