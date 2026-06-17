@@ -27,14 +27,18 @@ declare global {
   const durationOptions: typeof import('./config/exam').durationOptions
   const evaluateAnswerScore: typeof import('./lib/scoring').evaluateAnswerScore
   const examDefaultConfig: typeof import('./config/exam').examDefaultConfig
+  const executeCode: typeof import('./lib/codeExecutor').executeCode
   const forwardRef: typeof import('react').forwardRef
+  const getDefaultCode: typeof import('./lib/codeExecutor').getDefaultCode
   const getScoreLevel: typeof import('./config/score').getScoreLevel
   const iconMap: typeof import('./config/icons').iconMap
   const isAnswerCorrect: typeof import('./lib/scoring').isAnswerCorrect
+  const isPythonReady: typeof import('./lib/codeExecutor').isPythonReady
   const lazy: typeof import('react').lazy
   const memo: typeof import('react').memo
   const passScore: typeof import('./config/score').passScore
   const pathLevelConfig: typeof import('./config/learningPath').pathLevelConfig
+  const preloadPython: typeof import('./lib/codeExecutor').preloadPython
   const scoreLevelConfig: typeof import('./config/score').scoreLevelConfig
   const scoreLevelThresholds: typeof import('./config/score').scoreLevelThresholds
   const scoringWeights: typeof import('./config/score').scoringWeights
@@ -45,6 +49,7 @@ declare global {
   const use: typeof import('react').use
   const useActionState: typeof import('react').useActionState
   const useCallback: typeof import('react').useCallback
+  const useCodeSnippetStore: typeof import('./store/useCodeSnippetStore').useCodeSnippetStore
   const useContext: typeof import('react').useContext
   const useDebugValue: typeof import('react').useDebugValue
   const useDeferredValue: typeof import('react').useDeferredValue
