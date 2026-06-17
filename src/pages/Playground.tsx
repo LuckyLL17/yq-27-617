@@ -341,10 +341,10 @@ export default function Playground() {
 
               {/* 代码编辑区域 */}
               <div className="flex-1 relative">
-                {/* 语法高亮层 */}
+                {/* 语法高亮层（底层，显示彩色代码） */}
                 <pre
                   ref={highlightRef}
-                  className="absolute inset-0 p-4 m-0 text-sm font-mono leading-6 pointer-events-none overflow-auto text-transparent"
+                  className="absolute inset-0 p-4 m-0 text-sm font-mono leading-6 pointer-events-none overflow-auto"
                   aria-hidden="true"
                 >
                   <code
@@ -354,7 +354,7 @@ export default function Playground() {
                   />
                 </pre>
 
-                {/* 实际输入框 */}
+                {/* 实际输入框（上层，文字透明，光标可见） */}
                 <textarea
                   ref={textareaRef}
                   value={code}
@@ -362,8 +362,8 @@ export default function Playground() {
                   onScroll={handleScroll}
                   onKeyDown={handleKeyDown}
                   spellCheck={false}
-                  className="absolute inset-0 w-full h-full p-4 m-0 text-sm font-mono leading-6 bg-transparent text-white resize-none outline-none caret-white"
-                  style={{ tabSize: 2 }}
+                  className="absolute inset-0 w-full h-full p-4 m-0 text-sm font-mono leading-6 bg-transparent text-transparent resize-none outline-none caret-white selection:bg-primary-500/30"
+                  style={{ tabSize: 2, WebkitTextFillColor: 'transparent' }}
                 />
               </div>
             </div>
