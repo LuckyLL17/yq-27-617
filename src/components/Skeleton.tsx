@@ -4,6 +4,10 @@ interface SkeletonProps {
   className?: string;
 }
 
+/**
+ * 骨架屏加载组件
+ * 用于在内容加载时显示占位动画
+ */
 export function Skeleton({ className }: SkeletonProps) {
   return (
     <div
@@ -12,23 +16,5 @@ export function Skeleton({ className }: SkeletonProps) {
         className
       )}
     />
-  );
-}
-
-interface SkeletonCardProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function SkeletonCard({ children, className }: SkeletonCardProps) {
-  return (
-    <div
-      className={cn(
-        'bg-dark-800/50 border border-dark-700 rounded-xl',
-        className
-      )}
-    >
-      {children}
-    </div>
   );
 }
